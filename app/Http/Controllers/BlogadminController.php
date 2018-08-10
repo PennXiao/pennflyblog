@@ -12,9 +12,14 @@ class BlogadminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        //
+        return view('admin.index');
     }
 
     /**
@@ -22,10 +27,12 @@ class BlogadminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function navList()
     {
-        //
+        $navigation = \App\Navigation::get();
+        return view('admin.navList',['navList'=>$navigation]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +40,10 @@ class BlogadminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function navPost(Request $request)
     {
-        //
+        $res = \App\Navigation::save($request);
+        return back()->withInput();
     }
 
     /**

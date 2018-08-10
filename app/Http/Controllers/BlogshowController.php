@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 
 class BlogshowController extends Controller
 {
-    // 这里取整个导航栏的数据
-    private $navigation;
-
+    
     function __constructor(){
-        $this->navigation = Navigation::getNav();
+        // 这里取整个导航栏的数据
+        $navigation = App\Navigation::get();
+        View::share('navigation', $navigation);
+
+        parent::__constructor();
     }
     /**
      * Display a listing of the resource.
@@ -19,17 +21,8 @@ class BlogshowController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $blogList = \App\Blog::paginate(15);
+        return view('blog.index',['list'=>$blogList]);
     }
 
     /**

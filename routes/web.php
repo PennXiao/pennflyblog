@@ -12,3 +12,10 @@
 */
 
 Route::get('/','BlogshowController@index');
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', 'BlogAdminController@index')->name('admin.index');
+    Route::get('nav', 'BlogAdminController@navList')->name('admin.nav');
+    Route::post('navPost','BlogAdminController@navPost');
+});
