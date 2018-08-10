@@ -27,9 +27,9 @@
     </tbody>
   </table>
   </div>
+@endsection
 
-
-@section('bootadd') 
+@section('bottom') 
 <div class="modal fade" id="navModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -40,18 +40,19 @@
       <div class="modal-body">
         <p>
         
-        <form>
+        <form id="addNavPost" method="post" action="{{route('admin.navPost')}}">
+          <input type="hidden" name="_token" value="{{csrf_token()}}">
           <div class="form-group">
             <label for="recipient-name" class="control-label">名称:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" name="name" class="form-control">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Url:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" name="url" class="form-control">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">排序:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" name="sequence" class="form-control">
           </div>
           <div class="form-group">
             <label for="message-text" class="control-label">描述:</label>
@@ -62,7 +63,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="$('#addNavPost').submit()">Save changes</button>
       </div>
     </div>
   </div>

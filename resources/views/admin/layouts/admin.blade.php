@@ -100,8 +100,7 @@
     <script src="//v3.bootcss.com/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="//v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
-    @section('bootadd')
-    @show
+    @yield('bottom')
   </body>
 </html>
 

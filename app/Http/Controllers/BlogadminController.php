@@ -12,11 +12,6 @@ class BlogadminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.index');
@@ -42,7 +37,14 @@ class BlogadminController extends Controller
      */
     public function navPost(Request $request)
     {
-        $res = \App\Navigation::save($request);
+        // var_dump($request);die;
+
+        $navigation = new \App\Navigation();
+        // ::save($request);
+        $navigation->name = $request->input('name','未知列');
+        $navigation->url = $request->input('url','blog');
+        $navigation->sequence = $request->input('sequence',99);
+        $navigation->save();
         return back()->withInput();
     }
 
