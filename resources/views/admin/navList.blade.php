@@ -18,10 +18,10 @@
     @foreach($navList as $key=>$value)
       <tr>
         <td>{{$value->id}}</td>
-        <td>{{$value->name}}</td>
-        <td>{{$value->url}}</td>
-        <td>{{$value->sequence}}</td>
-        <td> <a href="javascript:void(0)" onclick="$('#navModal').modal('show')">编辑</a>  </td>
+        <td data-nav-name="{{$value->id}}">{{$value->name}}</td>
+        <td data-nav-url="{{$value->id}}">{{$value->url}}</td>
+        <td data-nav-sequence="{{$value->id}}">{{$value->sequence}}</td>
+        <td> <a href="javascript:void(0)" data-editId="{{$value->id}}">编辑</a>  </td>
       </tr>
     @endforeach
     </tbody>
@@ -44,15 +44,15 @@
           <input type="hidden" name="_token" value="{{csrf_token()}}">
           <div class="form-group">
             <label for="recipient-name" class="control-label">名称:</label>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name" class="form-control" id="name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Url:</label>
-            <input type="text" name="url" class="form-control">
+            <input type="text" name="url" class="form-control" id="url">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">排序:</label>
-            <input type="text" name="sequence" class="form-control">
+            <input type="text" name="sequence" class="form-control" id="sequence">
           </div>
           <div class="form-group">
             <label for="message-text" class="control-label">描述:</label>
@@ -71,7 +71,15 @@
 
 <script>
 $(document).ready(function(){
-  
+  $("[data-editId]").click(function(){
+    var navId = $(this).attr('data-editId');
+    if(navId)
+      $("#name").val($("[data-nav-name='"+navId+"']").text());
+      $("#url").val($("[data-nav-url='"+navId+"']").text());
+      $("#sequence").val($("[data-nav-Sequence='"+navId+"']").text());
+      $("#addNavPost").append('<input type="hidden" name="id" value="'+navId+'">');
+    $('#navModal').modal('show')
+  });
 })
 </script>
 @endsection

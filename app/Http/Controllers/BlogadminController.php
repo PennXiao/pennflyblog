@@ -30,17 +30,17 @@ class BlogadminController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * 新增编辑网站nav导航
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function navPost(Request $request)
     {
-        // var_dump($request);die;
-
-        $navigation = new \App\Navigation();
-        // ::save($request);
+        if ($request->input('id',false)) {
+            $navigation = \App\Navigation::find($request->input('id'));
+        }else{
+            $navigation = new \App\Navigation();
+        }
         $navigation->name = $request->input('name','未知列');
         $navigation->url = $request->input('url','blog');
         $navigation->sequence = $request->input('sequence',99);
