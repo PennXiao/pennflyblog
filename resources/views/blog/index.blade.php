@@ -1,5 +1,7 @@
 @extends('blog.layouts.blog')
 
+@section('title','首页')
+
 @section('content')
         <div class="blog-post" onclick="window.href='">
           <h3 class="blog-post-title"><a href="../blog?t=Py3VZX4">Nginx与PHP框架伪静态的配置</a></h3>

@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 class BlogshowController extends Controller
 {
     
-    function __constructor(){
+    function __construct(){
         // 这里取整个导航栏的数据
-        $navigation = App\Navigation::get();
-        View::share('navigation', $navigation);
-
-        parent::__constructor();
+        $navigation = \App\Navigation::get();
+        \View::share('navigation', $navigation);
     }
     /**
      * Display a listing of the resource.
@@ -21,6 +19,10 @@ class BlogshowController extends Controller
      */
     public function index()
     {
+
+        // $navigation = \App\Navigation::get();
+        // \View::share('navigation', $navigation);
+
         $blogList = \App\Blog::paginate(15);
         return view('blog.index',['list'=>$blogList]);
     }

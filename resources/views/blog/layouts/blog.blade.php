@@ -9,7 +9,7 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <title>@yield('title')-飞蓬技术栈</title>
+    <title> @yield('title') -飞蓬技术栈</title>
   </head>
 
   <body>
@@ -27,7 +27,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="pure-menu-item"><a href="../example/phpDev" class="pure-menu-link">PHP 开发</a></li>
+            @foreach($navigation as $navUrl)
+              <li class="pure-menu-item"><a href="{{$navUrl->url}}" class="pure-menu-link">{{$navUrl->name}}</a></li>
+            @endforeach
             <li class="pure-menu-item"><a href="#" class="pure-menu-link">杂谈</a></li>
           </ul>
         </div>
