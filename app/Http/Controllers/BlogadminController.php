@@ -18,7 +18,7 @@ class BlogadminController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 网站导航栏Nav.
      *
      * @return \Illuminate\Http\Response
      */
@@ -49,47 +49,37 @@ class BlogadminController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 网站导航栏Nav.
      *
-     * @param  \App\blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(blog $blog)
+    public function blog()
     {
-        //
+        die('我需要分页');
+        $navigation = \App\Blog::get();
+        return view('admin.navList',['navList'=>$navigation]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(blog $blog)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * 新增编辑网站nav导航
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, blog $blog)
+    public function blogPost(Request $request)
     {
-        //
+        die('我需要对数据');
+        if ($request->input('id',false)) {
+            $navigation = \App\Navigation::find($request->input('id'));
+        }else{
+            $navigation = new \App\Navigation();
+        }
+        $navigation->name = $request->input('name','未知列');
+        $navigation->url = $request->input('url','blog');
+        $navigation->sequence = $request->input('sequence',99);
+        $navigation->save();
+        return back()->withInput();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(blog $blog)
-    {
-        //
-    }
+
 }

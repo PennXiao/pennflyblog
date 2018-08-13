@@ -65,12 +65,18 @@
             </li>
 
             <li @if(URL::current() == route('admin.nav')) class="active" @endif >
-              <a href="{{route('admin.nav')}}">导航栏</a>
+              <a href="{{route('admin.nav')}}">Blog类别</a>
             </li>
 
-            <li><a href="#">分析</a></li>
-            <li><a href="#">输出</a></li>
+            <li @if(URL::current() == route('admin.blog')) class="active" @endif >
+              <a href="{{route('admin.blog')}}">Blog内容</a>
+            </li>
+
+            <li @if(URL::current() == route('admin.tag')) class="active" @endif >
+              <a href="{{route('admin.tag')}}">BlogTag</a>
+            </li>
           </ul>
+
           <ul class="nav nav-sidebar">
             <li><a href="">列表</a></li>
             <li><a href="">表单</a></li>
