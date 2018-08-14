@@ -2,6 +2,7 @@
 
 @section('content')
     <form method="post">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
       <div class="form-group">
         <label>文章标题</label>
         <input type="text" class="form-control" name="title" placeholder="响亮的标题">
