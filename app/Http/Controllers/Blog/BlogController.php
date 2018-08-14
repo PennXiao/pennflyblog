@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Blog;
+use View;
+use App\Blog\Navigation;
+use App\Blog\blog;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class BlogshowController extends Controller
+class BlogController extends Controller
 {
     
     function __construct(){
         // 这里取整个导航栏的数据
-        $navigation = \App\Navigation::get();
-        \View::share('navigation', $navigation);
+        $navigation = Navigation::get();
+        View::share('navigation', $navigation);
+        parent::__construct();
     }
     /**
      * Display a listing of the resource.
@@ -19,11 +23,7 @@ class BlogshowController extends Controller
      */
     public function index()
     {
-
-        // $navigation = \App\Navigation::get();
-        // \View::share('navigation', $navigation);
-
-        $blogList = \App\Blog::paginate(15);
+        $blogList = Blog::paginate(15);
         return view('blog.index',['list'=>$blogList]);
     }
 

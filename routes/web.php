@@ -11,19 +11,21 @@
 |
 */
 
-Route::get('/','BlogshowController@index');
+Route::namespace('Blog')->group(function () {
+    // 在 "App\Http\Controllers\Blog" 命名空间下的控制器
+	Route::get('/','BlogController@index');
+	Route::prefix('admin')->group(function () {
+	    Route::get('/', 'BlogAdminController@index')->name('admin.index');
 
+	    Route::get('nav', 'BlogAdminController@navList')->name('admin.nav');
+	    Route::post('nav','BlogAdminController@navPost')->name('admin.navPost');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', 'BlogAdminController@index')->name('admin.index');
+	    Route::get('blog','BlogAdminController@blog')->name('admin.blog');
+	    Route::get('blog/add',function(){return view('admin.blogAdd');})->name('admin.blogAdd');
+	    Route::post('blog/add','BlogAdminController@blogPost')->name('admin.blogPost');
 
-    Route::get('nav', 'BlogAdminController@navList')->name('admin.nav');
-    Route::post('nav','BlogAdminController@navPost')->name('admin.navPost');
+	    Route::get('tag','BlogAdminController@tag')->name('admin.tag');
+	    Route::post('tag','BlogAdminController@tagPost')->name('admin.tagPost');
 
-    Route::get('blog','BlogAdminController@blog')->name('admin.blog');
-    Route::post('blog','BlogAdminController@blogPost')->name('admin.blogPost');
-
-    Route::get('tag','BlogAdminController@tag')->name('admin.tag');
-    Route::post('tag','BlogAdminController@tagPost')->name('admin.tagPost');
-
+	});
 });
