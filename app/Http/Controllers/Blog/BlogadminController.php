@@ -74,8 +74,8 @@ class BlogadminController extends Controller
         } 
         $navigation->title = $request->input('title');
         $navigation->info = $request->input('info');
-        $navigation->html = $request->input('html');
-        $navigation->markdown = $request->input('markdown'); 
+        $navigation->html = $request->input('blogmd-html-code');
+        $navigation->markdown = $request->input('editormd-markdown-textarea'); 
         $navigation->save();
         return back()->withInput();
     }
