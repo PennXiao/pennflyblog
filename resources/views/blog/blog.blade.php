@@ -57,7 +57,7 @@
             });
         });
     </script>
-
+    <link rel="stylesheet" href="//pandao.github.io/editor.md/css/editormd.preview.css" />
 
 
 @endsection

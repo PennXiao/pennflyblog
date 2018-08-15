@@ -56,7 +56,7 @@ class BlogadminController extends Controller
      */
     public function blogList()
     {  
-        $blog = Blog::get()->paginate(config('app.paginate',15));
+        $blog = Blog::paginate(config('app.paginate',15));
         return view('admin.blogList',['blogList'=>$blog]);
     }
 
@@ -75,7 +75,7 @@ class BlogadminController extends Controller
         $navigation->title = $request->input('title');
         $navigation->info = $request->input('info');
         $navigation->html = $request->input('blogmd-html-code');
-        $navigation->markdown = $request->input('editormd-markdown-textarea'); 
+        $navigation->markdown = $request->input('blogmd-markdown-doc'); 
         $navigation->save();
         return back()->withInput();
     }

@@ -20,8 +20,12 @@ Route::namespace('Blog')->group(function () {
 	    Route::get('nav', 'BlogAdminController@navList')->name('admin.nav');
 	    Route::post('nav','BlogAdminController@navPost')->name('admin.navPost');
 
-	    Route::get('blog','BlogAdminController@blog')->name('admin.blog');
-	    Route::get('blog/add',function(){return view('admin.blogAdd');})->name('admin.blogAdd');
+	    Route::get('blog','BlogAdminController@bloglist')->name('admin.blog');
+
+	    Route::get('blog/add/{id?}',function($id=null){
+	    	return view('admin.blogAdd',['data'=>\App\Blog\Blog::find($id)]);
+	    })->name('admin.blogAdd');
+
 	    Route::post('blog/add','BlogAdminController@blogPost')->name('admin.blogPost');
 
 	    Route::get('tag','BlogAdminController@tag')->name('admin.tag');

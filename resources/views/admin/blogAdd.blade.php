@@ -3,16 +3,18 @@
 @section('content')
     <form method="post">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    @if(isset($data->id))<input type="hidden" name="id" value="{{$data->id}}">@endif
+
       <div class="form-group">
         <label>文章标题</label>
-        <input type="text" class="form-control" name="title" placeholder="响亮的标题">
+        <input type="text" class="form-control" value="{{$data->title or ''}}" name="title" placeholder="响亮的标题">
       </div>
       <div class="form-group">
         <label>文章简介</label> 
-        <textarea class="form-control" name="info" rows="3"></textarea>
+        <textarea class="form-control" name="info" rows="3">{{$data->info or ''}}</textarea>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">MD编辑器</label>
+        <label>MD编辑器</label>
         <div id="blogmd">
             <textarea style="display:none;">
             </textarea>
@@ -29,7 +31,7 @@
   <script src="//pandao.github.io/editor.md/editormd.js"></script>
   <script type="text/javascript">
       $(function() {
-              var md = '-- Start . ';
+              var md = "{{$data->markdown or '-- Start . '}}";
               var testEditor = editormd("blogmd", {
                   width  : "100%",
                   height : 640,

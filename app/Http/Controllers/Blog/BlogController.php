@@ -23,8 +23,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogList = Blog::paginate(15);
-        return view('blog.index',['list'=>$blogList]);
+        $blogList = Blog::orderby('created_at','desc')->paginate(15);
+        return view('blog.index',['bloglist'=>$blogList]);
     }
 
     /**
