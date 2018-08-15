@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-    <form method="post">
+    <form action="{{route('admin.blogPost')}}" method="post" >
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     @if(isset($data->id))<input type="hidden" name="id" value="{{$data->id}}">@endif
 
@@ -17,6 +17,7 @@
         <label>MD编辑器</label>
         <div id="blogmd">
             <textarea style="display:none;">
+              {{$data->markdown or '-- Start . '}}
             </textarea>
         </div>
       </div>
@@ -31,12 +32,11 @@
   <script src="//pandao.github.io/editor.md/editormd.js"></script>
   <script type="text/javascript">
       $(function() {
-              var md = "{{$data->markdown or '-- Start . '}}";
               var testEditor = editormd("blogmd", {
                   width  : "100%",
                   height : 640,
                   path   : "//pandao.github.io/editor.md/lib/",
-                  appendMarkdown : md,
+                  // appendMarkdown : md,
                   saveHTMLToTextarea : true,
                   emoji : false,
                   taskList : true,

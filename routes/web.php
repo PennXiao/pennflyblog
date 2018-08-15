@@ -28,7 +28,7 @@ Route::namespace('Blog')->group(function () {
 
 	    Route::post('blog/add','BlogAdminController@blogPost')->name('admin.blogPost');
 
-	    Route::get('tag','BlogAdminController@tag')->name('admin.tag');
+	    Route::get('tag','BlogAdminController@taglist')->name('admin.tag');
 	    Route::post('tag','BlogAdminController@tagPost')->name('admin.tagPost');
 
 	});

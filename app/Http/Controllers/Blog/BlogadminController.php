@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Blog\Blog;
 use App\Blog\Navigation;
+use App\Blog\Tagcloud;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -86,8 +87,8 @@ class BlogadminController extends Controller
      */
     public function tagList()
     {  
-        $blog = Blog::get()->paginate(config('app.paginate',15));
-        return view('admin.tagList',['blogList'=>$blog]);
+        $blog = Tagcloud::orderby('hot','desc')->paginate(config('app.paginate',15));
+        return view('admin.tagList',['tagList'=>$blog]);
     }
 
     /**
@@ -98,15 +99,14 @@ class BlogadminController extends Controller
     public function tagPost(Request $request)
     { 
         if ($request->input('id',false)) {
-            $navigation = Blog::find($request->input('id'));
+            $tagcloud = Tagcloud::find($request->input('id'));
         }else{
-            $navigation = new Blog();
+            $tagcloud = new Tagcloud();
         } 
-        $navigation->title = $request->input('title');
-        $navigation->info = $request->input('info');
-        $navigation->html = $request->input('html');
-        $navigation->markdown = $request->input('markdown'); 
-        $navigation->save();
+        $tagcloud->name = $request->input('name','未知列');
+        $tagcloud->hot = $request->input('hot',0);
+        $tagcloud->sequence = $request->input('sequence',99);
+        $tagcloud->save();
         return back()->withInput();
     }
 
