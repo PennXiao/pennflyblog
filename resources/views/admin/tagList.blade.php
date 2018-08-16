@@ -2,7 +2,18 @@
 
 @section('content')
  
-  <h2 class="sub-header">博客导航列表</h2>
+  <!-- <h3>内容标签Mark</h3> -->
+  <h4 class="sub-header">BlogMark</h4>
+  <div class="btn-group" role="group" aria-label="...">
+  
+    <button type="button" class="btn btn-default" data-editId="0">新增</button>
+    <button type="button" class="btn btn-default">Middle</button>
+    <button type="button" class="btn btn-default">Right</button>
+  </div>
+
+
+
+
   <div class="table-responsive">
   <table class="table table-striped">
     <thead>

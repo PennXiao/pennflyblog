@@ -3,6 +3,13 @@
 @section('content')
  
   <h2 class="sub-header">博客导航列表</h2>
+
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default">Left</button>
+    <button type="button" class="btn btn-default">Middle</button>
+    <button type="button" class="btn btn-default">Right</button>
+  </div>
+
   <div class="table-responsive">
   <table class="table table-striped">
     <thead>

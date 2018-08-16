@@ -30,7 +30,6 @@
             @foreach($navigation as $navUrl)
               <li class="pure-menu-item"><a href="{{$navUrl->url}}" class="pure-menu-link">{{$navUrl->name}}</a></li>
             @endforeach
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">杂谈</a></li>
           </ul>
         </div>
       </div>
@@ -50,13 +49,6 @@
           <span class="label label-success">Python</span>
           <span class="label label-info">更新</span>
           <span class="label label-warning">开发</span>
-          <span class="label label-danger">好烦</span>
-          <span class="label label-default">文档</span>
-          <span class="label label-primary">Mysql</span>
-          <span class="label label-success">Python</span>
-          <span class="label label-info">更新</span>
-          <span class="label label-warning">开发</span>
-          <span class="label label-danger">好烦</span>
         </div>
         <div class="sidebar-module">
           <h4>历史</h4>
@@ -67,7 +59,7 @@
         <div class="sidebar-module">
           <h4>关注</h4>
           <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
+            <li><a href="https://github.com/PennXiao">GitHub</a></li>
             <li><a href="#">公众号</a></li>
             <li><a href="#">Facebook</a></li>
           </ol>
