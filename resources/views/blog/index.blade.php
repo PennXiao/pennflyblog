@@ -23,12 +23,8 @@
 
   @endforeach
 
-      <nav>
-        <ul class="pager">
-          <li><a href="#">上页</a></li>
-          <li><a href="#">下页</a></li>
-        </ul>
-      </nav>
+{{$bloglist->links()}}
+
 @endsection
 
 @section('bottom')
