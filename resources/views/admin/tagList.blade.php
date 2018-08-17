@@ -5,15 +5,10 @@
   <!-- <h3>内容标签Mark</h3> -->
   <h4 class="sub-header">BlogMark</h4>
   <div class="btn-group" role="group" aria-label="...">
-  
     <button type="button" class="btn btn-default" data-editId="0">新增</button>
     <button type="button" class="btn btn-default">Middle</button>
     <button type="button" class="btn btn-default">Right</button>
   </div>
-
-
-
-
   <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -57,17 +52,13 @@
             <input type="text" name="name" class="form-control" id="name">
           </div>
           <div class="form-group">
-            <label for="recipient-name" class="control-label">Url:</label>
+            <label for="recipient-name" class="control-label">热度:</label>
             <input type="text" name="hot" class="form-control" id="hot">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="control-label">排序:</label>
             <input type="text" name="sequence" class="form-control" id="sequence">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="control-label">描述:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
+          </div> 
         </form>
         </p>
       </div>

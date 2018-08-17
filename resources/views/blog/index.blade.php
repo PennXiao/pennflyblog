@@ -14,9 +14,7 @@
           </blockquote>
           <p>
             <div id="editormd-view-{{$v->id}}">
-                <textarea style="display:none;">
-                  {{$v->markdown}} 
-                </textarea>          
+                <textarea style="display:none;">{{$v->markdown}}</textarea>          
             </div> 
           </p>
         </div>
