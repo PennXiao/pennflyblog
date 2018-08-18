@@ -49,6 +49,9 @@
           <span class="label label-success">Python</span>
           <span class="label label-info">更新</span>
           <span class="label label-warning">开发</span>
+          @foreach($tagcloud as $tag)
+          <span class="label label-default">{{$tag->name}}</span>
+          @endforeach
         </div>
         <div class="sidebar-module">
           <h4>历史</h4>
