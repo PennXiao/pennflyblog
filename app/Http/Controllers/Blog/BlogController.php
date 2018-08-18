@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Blog;
 use View;
 use App\Blog\Navigation;
-use App\Blog\blog;
+use App\Blog\Tagcloud; 
+use App\Blog\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,9 +12,9 @@ class BlogController extends Controller
 {
     
     function __construct(){
-        // 这里取整个导航栏的数据
-        $navigation = Navigation::get();
-        View::share('navigation', $navigation);
+        // 这里取整个导航栏的数据 
+        View::share('navigation', Navigation::get());
+        View::share('tagcloud', Tagcloud::get());
         parent::__construct();
     }
     /**
@@ -33,53 +34,12 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function blog(Request $request, $id)
     {
-        //
+        return view('blog.blog',['data'=>Blog::find( $id)]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+ 
+    public function getBlogMd($id){
+        echo (Blog::where('id',$id)->first(['markdown'])->markdown);
     }
 }

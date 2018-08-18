@@ -12,8 +12,10 @@
 */
 
 Route::namespace('Blog')->group(function () {
-    // 在 "App\Http\Controllers\Blog" 命名空间下的控制器
 	Route::get('/','BlogController@index');
+	Route::get('blog/{id?}','BlogController@blog');
+	Route::get('getMd/{id?}','BlogController@getBlogMd');
+
 	Route::prefix('admin')->group(function () {
 	    Route::get('/', 'BlogAdminController@index')->name('admin.index');
 
@@ -30,6 +32,18 @@ Route::namespace('Blog')->group(function () {
 
 	    Route::get('tag','BlogAdminController@taglist')->name('admin.tag');
 	    Route::post('tag','BlogAdminController@tagPost')->name('admin.tagPost');
-
 	});
+	
 });
+
+
+
+Route::any('register',function(){
+	abort(404);#屏蔽注册网址
+});
+Route::any('logout',function(){
+	Auth::logout();
+	return back();
+});
+
+Auth::routes();

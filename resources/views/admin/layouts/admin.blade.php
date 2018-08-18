@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +46,7 @@
             <li><a href="#">仪表盘</a></li>
             <li><a href="#">设置</a></li>
             <li><a href="#">资料</a></li>
-            <li><a href="#">帮助</a></li>
+            <li><a href="{{ route('logout') }}">退出</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
