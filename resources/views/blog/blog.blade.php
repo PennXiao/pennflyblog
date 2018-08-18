@@ -1,6 +1,6 @@
 @extends('blog.layouts.blog')
 
-@section('title','首页')
+@section('title',$data->title)
 
 @section('content')
     <h1 class="sub-header"> {{$data->title}}</h1>
