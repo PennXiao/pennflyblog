@@ -43,9 +43,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">仪表盘</a></li>
+            <!-- <li><a href="#">仪表盘</a></li> -->
             <li><a href="#">设置</a></li>
-            <li><a href="#">资料</a></li>
+            <!-- <li><a href="#">资料</a></li> -->
             <li><a href="{{ route('logout') }}">退出</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -65,15 +65,15 @@
             </li>
 
             <li @if(URL::current() == route('admin.nav')) class="active" @endif >
-              <a href="{{route('admin.nav')}}">Blog类别</a>
+              <a href="{{route('admin.nav')}}">导航栏</a>
             </li>
 
             <li @if(URL::current() == route('admin.blog')) class="active" @endif >
-              <a href="{{route('admin.blog')}}">Blog内容</a>
+              <a href="{{route('admin.blog')}}">内容</a>
             </li>
 
             <li @if(URL::current() == route('admin.tag')) class="active" @endif >
-              <a href="{{route('admin.tag')}}">BlogTag</a>
+              <a href="{{route('admin.tag')}}">标签</a>
             </li>
           </ul>
 
