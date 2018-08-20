@@ -36,7 +36,7 @@ Route::namespace('Blog')->group(function () {
 	
 });
 
-
+Route::any('chat','ChatController@index');
 
 Route::any('register',function(){
 	abort(404);#屏蔽注册网址
