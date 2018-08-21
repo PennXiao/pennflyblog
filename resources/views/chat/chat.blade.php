@@ -61,7 +61,7 @@
 	<script src="//v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 	
 	<script>
-		var wsClice = new WebSocket("ws://{{$src or '127.0.0.1:9501'}}");
+		var wsClice = new WebSocket("{{$data->socketPath or 'ws://127.0.0.1:8000'}}");
 		var chatShow = $("#chatShow");
 		var chatMsg  = $("#chatMsg");
 		var chatSend = $("#chatSend");
