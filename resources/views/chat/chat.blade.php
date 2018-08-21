@@ -8,14 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>聊天室</title>
+    <title>Chat聊天室</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="//v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="//v3.bootcss.com/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -27,26 +26,26 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
   <body>
 
     <div class="container">
       <div class="row">
-      	<div class="col-md-6">
+      	<div class="col-md-6 col-md-offset-6">
       		
-			<div class="page-header">
-				<h1><small>Chat详情</small></h1>
+			<div class="page-header" style="line-height: 50px;">
+				<h1>Chat<img style="width: 30px;" src="https://png.icons8.com/ios/50/000000/speech-bubble-with-dots.png"></h1>
 			</div>
-			<div id="chatC">
-				<div class="panel ">您好我是小C^.^</div>
-				<div class="panel text-right">...</div>
+
+			<div id="chatShow" style="overflow:auto;overflow-x:hidden;height:400px;">
+				<div class="">当前聊天室人数[0]</div>
 			</div>
-			<textarea class="form-control" id="sendMsg" rows="3" placeholder="请输入聊天内容"></textarea>
-			<!-- <div class="form-group"> -->
-			<br/>
-			<button type="button" id="send" class="btn btn-default form-control">发送</button>
-			<br/>				
-			<!-- </div> -->
+
+			<div style="padding-bottom: 15px;">
+				<textarea class="form-control" id="chatMsg" rows="3" placeholder="请输入聊天内容"></textarea>
+				<br/>
+				<button type="button" id="chatSend" class="btn btn-default form-control">发送</button>
+			</div>
+
       	</div>
       </div>
     </div>
@@ -55,43 +54,64 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="//v3.bootcss.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="//v3.bootcss.com/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="//v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
-	<script>
-	var ws = new WebSocket("ws://127.0.0.1:9501");
-
-	ws.onopen = function(evt) { 
-	  console.log("Connection open ..."); 
-	};
 	
-	ws.onclose = function(evt) {
-	  console.log("Connection closed.");
-	};
+	<script>
+		var wsClice = new WebSocket("ws://{{$src or '127.0.0.1:9501'}}");
+		var chatShow = $("#chatShow");
+		var chatMsg  = $("#chatMsg");
+		var chatSend = $("#chatSend");
 
-	ws.onerror = function(event) {
-	  console.log('error:'+ event)
-	};
+		// init javascript
+		(function (env){
+			chatSend.attr("disabled");
+		}(this));
 
-	ws.onmessage = function(evt) {
-	  var msg =	'<div class="panel">'+evt.data+'</div>';
-	  $("#chatC").append(msg);
-	};
+		// 
+		function getSendMsgHtml(str=''){
+			return '<div class="selfMsg text-right">'+ str +'</div>';
+		}
 
-	$("#send").click(function(){
-		var send = $("#sendMsg");
-		ws.send(send.val());
-		var msg =	'<div class="panel text-right">'+send.val()+'</div>';
-		$("#chatC").append(msg);
-		send.val('');
-	})
+		function getServeMsgHtml(str=''){
+			return '<div class="otherMsg">'+ str +'</div>';
+		}
 
-	// ws.close();	
-	// ws.send('your message');
-	</script>	
+		function sendServeMsg(){ 
+			var msgText = chatMsg.val(); 
+			var msg = getSendMsgHtml(msgText);
+			wsClice.send(msgText);
+			chatShow.append(msg); 
+ 			chatShow.scrollTop(chatShow[0].scrollHeight);
+ 			chatMsg.val('');
+		}
 
+		wsClice.onopen = function(evt) { 
+		  chatSend.removeAttr("disabled");
+		};
+
+		wsClice.onclose = function(evt) {
+		  chatSend.attr("disabled");
+		};
+
+		wsClice.onerror = function(event) {
+		  	console.log('error:'+ event)
+		  	//发送错误信息到http服务器
+		};
+
+		wsClice.onmessage = function(evt) {
+			var msg = getServeMsgHtml(evt.data);
+			chatShow.append(msg);
+ 			chatShow.scrollTop(chatShow[0].scrollHeight); 
+		};
+
+		chatSend.click(function(){
+			sendServeMsg();
+		})
+		// ws.close();
+	</script>
   </body>
 </html>
