@@ -113,5 +113,27 @@
 		})
 		// ws.close();
 	</script>
+	<style type="text/css">
+
+		.selfMsg , .otherMsg{
+			margin-top:15px;
+			padding: 5px;
+		}
+		.selfMsg span{
+			border:1px solid #909090;
+			border-radius: 9px 9px 0px 9px;
+			padding: 5px; 
+			margin-top:15px;
+		} 
+		.otherMsg span{
+			border:1px solid #909090;
+			border-radius: 9px 9px 9px 0px;
+			padding: 5px; 
+			margin-top:15px;
+		} 
+	</style>
+
+
+	
   </body>
 </html>
