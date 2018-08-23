@@ -5,25 +5,12 @@
 	<title>{{录制视屏}}</title>
 </head>
 <body>
-	<video></video>
+	<video id="#video1"></video>
+	<video id="#video2"></video>
 	<script type="text/javascript">
 
-		// navigator.getUserMedia ( {
-		  // audio: true,
-		  // video: { width: 1280, height: 720 }
-		// },
 
-		// function(stream) {
-		//    var video = document.querySelector('video');
-		//    video.src = window.URL.createObjectURL(stream);
-		//    video.onloadedmetadata = function(e) {
-		//       // Do something with the video here.
-		//    };
-		// }, 
-		// function(msg){
-		// 	console.log(msg);
-		// } );
-
+var wsClice  = new WebSocket('ws://127.0.0.1:9502');
 
 navigator.getUserMedia = navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -32,11 +19,21 @@ navigator.getUserMedia = navigator.getUserMedia ||
 if (navigator.getUserMedia) {
    navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
       function(stream) {
-         var video = document.querySelector('video');
-         video.src = window.URL.createObjectURL(stream);
-         video.onloadedmetadata = function(e) {
-           video.play();
-         };
+		// wsClice.send(stream);
+         var video1 = document.querySelector('video');
+         video1.src = window.URL.createObjectURL(stream);
+         video1.onloadedmetadata = function(e) {
+           video1.play();
+		 };
+		 
+		 var video2 = document.querySelector('#video2');
+			video2.src = window.URL.createObjectURL(stream);
+			video2.onloadedmetadata = function(e) {
+			video2.play();
+			};
+
+
+
       },
       function(err) {
          console.log("The following error occurred: " + err.name);
@@ -45,6 +42,14 @@ if (navigator.getUserMedia) {
 } else {
    console.log("getUserMedia not supported");
 }
+
+wsClice.onmessage = function(evt) {
+	var video2 = document.querySelector('#video2');
+			video2.src = window.URL.createObjectURL(evt.data);
+			video2.onloadedmetadata = function(e) {
+			video2.play();
+			};
+};
 
 	</script>
 </body>

@@ -18,7 +18,8 @@ class webSocket
 
         $this->serve = new swoole_websocket_server($this->host,$this->port);
 
-        $this->serve->on('open',function(swoole_websocket_server $server, $frame){ 
+        $this->serve->on('open',function(swoole_websocket_server $server, $frame){
+            $this->msg = [];
             $this->msg['contPeople'] = count($server->connections);
             $response = json_encode($this->msg);
             foreach ($server->connections as $clientId) {

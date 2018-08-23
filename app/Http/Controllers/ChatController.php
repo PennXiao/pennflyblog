@@ -11,7 +11,7 @@ class ChatController extends Controller
         {
             $socketPath = 'wss://www.pennfly.com/chatserve/';
         }else {
-            $socketPath = 'ws://www.pennfly.com/chatserve/';
+            $socketPath = 'ws://127.0.0.1:9501/';
         }
         $data['socketPath'] = $socketPath;
         return view('chat.chat',['data'=> (object)$data ]);
