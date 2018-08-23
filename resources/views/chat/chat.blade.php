@@ -32,12 +32,13 @@
       <div class="row">
       	<div class="col-md-6 col-md-offset-6">
       		
-			<div class="page-header" style="line-height: 50px;">
+			<div class="page-header">
 				<h1>Chat<img style="width: 30px;" src="https://png.icons8.com/ios/50/000000/speech-bubble-with-dots.png"></h1>
+				<p class="">当前聊天室人数  <span class="badge" id="chatCountPeople">...</span></p>
 			</div>
 
 			<div id="chatShow" style="overflow:auto;overflow-x:hidden;height:400px;">
-				<div class="">当前聊天室人数[0]</div>
+				
 			</div>
 
 			<div style="padding-bottom: 15px;">
@@ -61,10 +62,11 @@
 	<script src="//v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 	
 	<script>
-		var wsClice = new WebSocket("{{$data->socketPath or 'ws://127.0.0.1:8000'}}");
-		var chatShow = $("#chatShow");
-		var chatMsg  = $("#chatMsg");
-		var chatSend = $("#chatSend");
+		var wsClice  = new WebSocket("{{$data->socketPath or 'ws://127.0.0.1:8000'}}");
+		var chatShow = $("#chatShow");//消息框
+		var chatMsg  = $("#chatMsg");//聊天输入框
+		var chatSend = $("#chatSend");//发送按钮
+		var chatCountPeople = $("#chatCountPeople");//当前会话人数
 
 		// init javascript
 		(function (env){
@@ -73,11 +75,11 @@
 
 		// 
 		function getSendMsgHtml(str=''){
-			return '<div class="selfMsg text-right">'+ str +'</div>';
+			return '<div class="selfMsg text-right"><span class="bg-success">'+ str +'</span></div>';
 		}
 
 		function getServeMsgHtml(str=''){
-			return '<div class="otherMsg">'+ str +'</div>';
+			return '<div class="otherMsg"><span class="bg-info">'+ str +'</span></div>';
 		}
 
 		function sendServeMsg(){ 
@@ -103,9 +105,18 @@
 		};
 
 		wsClice.onmessage = function(evt) {
-			var msg = getServeMsgHtml(evt.data);
-			chatShow.append(msg);
- 			chatShow.scrollTop(chatShow[0].scrollHeight); 
+			console.log(evt);
+			var objRes = JSON.parse(evt.data);
+			//如果有人数更新
+			if (objRes.contPeople) {
+				chatCountPeople.text(objRes.contPeople);
+			}
+			//如果有聊天消息
+			if (objRes.message) {
+				var msg = getServeMsgHtml(objRes.message);
+				chatShow.append(msg);
+	 			chatShow.scrollTop(chatShow[0].scrollHeight); 
+			}
 		};
 
 		chatSend.click(function(){
@@ -113,6 +124,7 @@
 		})
 		// ws.close();
 	</script>
+
 	<style type="text/css">
 
 		.selfMsg , .otherMsg{
@@ -132,8 +144,6 @@
 			margin-top:15px;
 		} 
 	</style>
-
-
 	
   </body>
 </html>
