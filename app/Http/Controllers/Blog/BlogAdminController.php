@@ -65,6 +65,11 @@ class BlogadminController extends Controller
         return view('admin.blogList',['blogList'=>$blog]);
     }
 
+
+    public function blogAdd($id=null){
+        return view('admin.blogAdd',['data'=>\App\Blog\Blog::find($id)]);
+    }
+
     /**
      * 新增编辑文章
      * @param  \Illuminate\Http\Request  $request

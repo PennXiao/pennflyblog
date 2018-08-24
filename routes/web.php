@@ -23,11 +23,7 @@ Route::namespace('Blog')->group(function () {
 	    Route::post('nav','BlogAdminController@navPost')->name('admin.navPost');
 
 	    Route::get('blog','BlogAdminController@bloglist')->name('admin.blog');
-
-	    Route::get('blog/add/{id?}',function($id=null){
-	    	return view('admin.blogAdd',['data'=>\App\Blog\Blog::find($id)]);
-	    })->name('admin.blogAdd');
-
+	    Route::get('blog/add/{id?}','BlogAdminController@blogAdd')->name('admin.blogAdd');
 	    Route::post('blog/add','BlogAdminController@blogPost')->name('admin.blogPost');
 
 	    Route::get('tag','BlogAdminController@taglist')->name('admin.tag');
@@ -41,6 +37,7 @@ Route::any('chat','ChatController@index');
 Route::any('register',function(){
 	abort(404);#屏蔽注册网址
 });
+
 Route::any('logout',function(){
 	Auth::logout();
 	return back();
