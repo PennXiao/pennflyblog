@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Blog;
-use View;
+
 use App\Blog\Navigation;
 use App\Blog\Tagcloud; 
 use App\Blog\Blog;
+
+use View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,20 +14,19 @@ class BlogController extends Controller
 {
     
     function __construct(){
-        // 这里取整个导航栏的数据 
-        View::share('navigation', Navigation::get());
-        View::share('tagcloud', Tagcloud::get());
+        View::share('navigation', Navigation::get());#网页导航
+        View::share('tagcloud', Tagcloud::get());#云标签
         parent::__construct();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    //笔记首页
     public function index()
     {
-        $blogList = Blog::orderby('created_at','desc')->paginate(15);
-        return view('blog.index',['bloglist'=>$blogList]);
+        $blogList = Blog::orderby('created_at','desc')
+        ->paginate(15);
+
+        $data = ['bloglist'=>$blogList];
+        return view('blog.index',$data);
     }
 
     /**
