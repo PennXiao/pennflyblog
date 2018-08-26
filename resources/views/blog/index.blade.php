@@ -1,4 +1,4 @@
-@extends('blog.layouts.blog')
+@extends('layouts.blog')
 
 @section('title','首页')
 
@@ -6,7 +6,7 @@
   
   @foreach($bloglist as $v)
         <div class="blog-post">
-          <h3 class="blog-post-title"><a href="/blog/{{$v->id}}">{{$v->title}}</a></h3>
+          <h3 class="blog-post-title"><a href="{{route('blogInfo',shortUrl($v->id))}}">{{$v->title}}</a></h3>
           <p class="blog-post-meta">{{$v->created_at}}</p>
           <blockquote>
             <p>{{$v->info}}</p> 
@@ -17,7 +17,6 @@
               {!! $v->html !!}
               <a data-hide-id="{{$v->id}}">收起</a>
             </div>
-            
           </p>
         </div>
   @endforeach

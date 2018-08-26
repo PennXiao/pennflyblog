@@ -13,7 +13,7 @@
 
 Route::namespace('Blog')->group(function () {
 	Route::get('/','BlogController@index');
-	Route::get('blog/{id?}','BlogController@blog');
+	Route::get('blog/{id?}','BlogController@blog')->name('blogInfo');
 	Route::get('getMd/{id?}','BlogController@getBlogMd');
 
 	Route::prefix('admin')->group(function () {

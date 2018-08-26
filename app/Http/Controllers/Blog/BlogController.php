@@ -6,6 +6,7 @@ use App\Blog\Navigation;
 use App\Blog\Tagcloud; 
 use App\Blog\Blog;
 
+
 use View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,7 +38,11 @@ class BlogController extends Controller
      */
     public function blog(Request $request, $id)
     {
-        return view('blog.blog',['data'=>Blog::find( $id)]);
+        $data = Blog::where('shorturl', $id)->first();
+        if(!$data){
+            return abort(404);
+        }
+        return view('blog.blog',['data'=>$data]);
     }
  
     public function getBlogMd($id){
