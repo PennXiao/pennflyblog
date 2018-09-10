@@ -10,7 +10,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    function __construct(){
-    	
+
+    private $nameSpace = null;//命名空间
+    private $action = null;//传输视图名称
+    private $shareData = [];//分享数据
+
+    public function view($viewPath = null, $viewData = []){
+
+    	if ($viewPath === null) {
+    		$nameSpace = '';
+    		$action = '';
+    	}
+    	return view($nameSpace.'.'.$action,$this->shareData);
     }
 }
