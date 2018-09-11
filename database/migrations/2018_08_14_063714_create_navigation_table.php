@@ -16,7 +16,8 @@ class CreateNavigationTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 45)->unique('name_UNIQUE')->comment('导航中文名称');
-			$table->string('url', 45)->unique('url_UNIQUE')->comment('url路径');
+			$table->string('textarea')->comment('文章概要详情');
+			$table->string('actionurl', 45)->unique('url_UNIQUE')->comment('url路径');
 			$table->boolean('sequence')->nullable();
 			$table->timestamps();
 			$table->softDeletes();

@@ -11,9 +11,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private $nameSpace = null;//命名空间
-    private $action = null;//传输视图名称
-    private $shareData = [];//分享数据
+    protected $nameSpace = null;//命名空间
+    protected $action = null;//传输视图名称
+    protected $shareData = [];//分享数据
 
     public function view($viewPath = null, $viewData = []){
 
