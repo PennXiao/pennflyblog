@@ -17,7 +17,7 @@ class CreateNotesTable extends Migration
 			$table->increments('id');
 			$table->string('title')->comment('标题');
 			$table->string('textarea')->comment('文章概要详情');
-            $table->integer('Pageviews');
+            $table->integer('pageviews')->comment('浏览量');
             $table->integer('navaction_id');
 			$table->timestamps();
 			$table->softDeletes();

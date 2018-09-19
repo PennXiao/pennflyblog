@@ -16,6 +16,7 @@ class CreateTagcloudTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 45)->unique('name_UNIQUE')->comment('标签名称');
+			$table->string('textarea')->comment('文章概要详情');
 			$table->boolean('pageviews')->comment('浏览量');
 			$table->boolean('sequence')->nullable()->comment('排序');
 			$table->timestamps();

@@ -1,31 +1,34 @@
 <?php
-
 namespace App\Http\Controllers\Blog;
 
-use App\Blog\Navigation;
-use App\Blog\Tagcloud; 
-use App\Blog\Blog;
-
-
-use View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Blog\Blog;
+use App\Blog\Tagcloud; 
+use App\Blog\Navigation;
+
 class BlogController extends Controller
 {
+
+    protected $nameSpace = 'blog';
     
-    function __construct(){
+    protected function doShareView(){
         View::share('navigation', Navigation::get());#网页导航
         View::share('tagcloud', Tagcloud::get());#云标签
-        parent::__construct();
     }
 
-    //笔记首页
+    /**
+     * 文章列表页
+     * @return [type] [description]
+     */
     public function index()
     {
-        $blogList = Blog::orderby('created_at','desc')
-        ->paginate(15);
 
+        die('here');
+
+        // $blogList = Blog::orderby('created_at','desc')
+        // ->paginate(15);
         $data = ['bloglist'=>$blogList];
         return view('blog.index',$data);
     }
