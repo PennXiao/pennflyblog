@@ -1,0 +1,37 @@
+<h2 id="php与nginx伪静态的配置">PHP与Nginx伪静态的配置</h2>
+
+<h2 id="配置demo">配置demo</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+	listen  80;
+	listen  443 ssl;
+	server_name  pennfly.github.io;
+	root  /path/pennfly.github.io;
+
+	#ssl  on; 
+	ssl_certificate  /path/pennfly.com_bundle.crt;
+	ssl_certificate_key  /path/2_pennfly.com.key;
+
+	index  index.php index.html index.htm;
+  
+	location / {
+		try_files $uri $uri/ /index.php?$query_string;
+	}
+  
+	location ~ \.php$ {
+		try_files  $uri /index.php =404;
+		fastcgi_split_path_info  ^(.+\.php)(/.+)$;
+		fastcgi_pass  127.0.0.1:9000;
+		fastcgi_index  index.php;
+		fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		include  fastcgi_params;
+	}
+}
+</code></pre></div></div>
+
+<h2 id="配置注意事项">配置注意事项</h2>
+
+<ul>
+  <li>listen 443 需要跟ssl参数表明支持https服务</li>
+  <li>ssl：on 表示开启 https 不能在混合（http\https）配置中使用此配置</li>
+</ul>
