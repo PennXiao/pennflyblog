@@ -1,0 +1,77 @@
+{% include header.html %}
+    {% include nav.html %}
+    <div class="container">
+
+      <div class="col-sm-8">
+<!-- 设置网站目录 -->
+{% for category in site.categories %}
+<h2>
+  <a href="{{ site.baseurl}}/category/{{ category.first }}.html">
+    {{category.first}}（{{category.last.size}}）
+  </a>
+</h2>
+
+  <ul class="posts">
+  {% for post in category.last %}
+    <li>
+      <a href="{{ post.url | absolute_url }}">
+        {{ post.title }}
+      </a>
+    </li>
+  {% endfor %}
+  </ul>
+
+{% endfor %}
+<!-- 设置网站tag -->
+{% for tag in site.tags %}
+<h2>
+  <a href="{{ site.baseurl}}/tag/{{ tag.first }}.html">
+    {{tag.first}}（{{tag.last.size}}）
+  </a>
+</h2>
+
+  <ul class="posts">
+  {% for post in tag.last %}
+    <li>
+      <a href="{{ post.url | absolute_url }}">
+        {{ post.title }}
+      </a>
+    </li>
+  {% endfor %}
+  </ul>
+
+{% endfor %}
+
+
+         
+      </div>
+
+
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar" id="custom-toc-container">
+        <div class="sidebar-module sidebar-module-inset">
+          <h4>标签</h4>
+
+          {% for tag in site.tags %}
+          <span class="label label-default">{{tag.first}}</span>
+          {% endfor %}
+          
+        </div>
+
+        <div class="sidebar-module">
+          <h4>历史</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">2018-09-01</a></li>
+          </ol>
+        </div>
+
+        <div class="sidebar-module">
+          <h4>关注</h4>
+          <ol class="list-unstyled">
+            <li><a href="https://github.com/pennilessfor" target="_blank">GitHub</a></li>
+          </ol>
+        </div>
+
+      </div>
+
+    </div>
+{% include footer.html %}
